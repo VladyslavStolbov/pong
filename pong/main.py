@@ -11,10 +11,10 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Pong")
 clock = pygame.time.Clock()
 
-background_image = pygame.image.load("assets/board.png")
+background_image = pygame.image.load("../assets/board.png")
 
-player_sprite = Player("assets/paddle.png", 0, SCREEN_HEIGHT // 2)
-computer_sprite = Computer("assets/paddle.png", SCREEN_WIDTH, SCREEN_HEIGHT // 2)
+player_sprite = Player("../assets/paddle.png", 0, SCREEN_HEIGHT // 2)
+computer_sprite = Computer("../assets/paddle.png", SCREEN_WIDTH, SCREEN_HEIGHT // 2)
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player_sprite, computer_sprite)
 
