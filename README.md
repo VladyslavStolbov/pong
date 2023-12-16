@@ -1,7 +1,7 @@
 # Pong
 
 ## MVP
-- [ ] Keyboard movements
+- [X] Keyboard movements
 - [ ] Basic ball collision
 - [ ] Score for each player
 - [ ] Game win/lose, end conditions
@@ -12,4 +12,4 @@
 Additional(if everything above made and looks good):
 - [ ] Start menu
 - [ ] End menu
-- [ ] Controls for Vim geeks
+- [X] Controls for Vim geeks
