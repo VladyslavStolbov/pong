@@ -1,20 +1,20 @@
 import pygame
 from pygame.locals import *
 
-from paddle import Paddle
+from config import *
+from player import Player
+from computer import Computer
 
 pygame.init()
-
-SCREEN_WIDTH = 1280
-SCREEN_HEIGHT = 720
-FPS = 60
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Pong")
 clock = pygame.time.Clock()
 
-player_sprite = Paddle("assets/player.png", 10, SCREEN_HEIGHT // 2)
-computer_sprite = Paddle("assets/computer.png", SCREEN_WIDTH - 10, SCREEN_HEIGHT // 2)
+background_image = pygame.image.load("assets/board.png")
+
+player_sprite = Player("assets/paddle.png", 0, SCREEN_HEIGHT // 2)
+computer_sprite = Computer("assets/paddle.png", SCREEN_WIDTH, SCREEN_HEIGHT // 2)
 all_sprites = pygame.sprite.Group()
 all_sprites.add(player_sprite, computer_sprite)
 
@@ -27,11 +27,11 @@ while running:
         if event.type == KEYDOWN and event.key == K_ESCAPE:
             running = False
 
-    screen.fill("white")
+    screen.blit(background_image, (0, 0))
 
     keys = pygame.key.get_pressed()
     player_sprite.update(keys)
-    all_sprites.update(keys)
+    computer_sprite.update()
     all_sprites.draw(screen)
 
     pygame.display.flip()

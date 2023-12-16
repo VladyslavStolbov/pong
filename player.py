@@ -3,7 +3,7 @@ from config import *
 from pygame.locals import *
 
 
-class Paddle(pygame.sprite.Sprite):
+class Player(pygame.sprite.Sprite):
     def __init__(self, image_path, position_x=0, position_y=0):
         super().__init__()
         self.image = pygame.image.load(image_path).convert()
@@ -11,7 +11,6 @@ class Paddle(pygame.sprite.Sprite):
         self.position_x = position_x
         self.position_y = position_y
         self.rect.topleft = (position_x, position_y)
-        self.image.set_colorkey("black")
 
     def update(self, keys):
         if any(keys[key] for key in (K_UP, K_w, K_k)):
