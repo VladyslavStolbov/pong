@@ -41,7 +41,7 @@ while running:
     paddles_group.draw(screen)
     ball_group.draw(screen)
 
-    player.update(keys)
+    player.update()
     computer.update()
     ball_group.update()
 

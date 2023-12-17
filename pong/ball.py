@@ -12,6 +12,8 @@ class Ball(pygame.sprite.Sprite):
         self.speed_y = speed_y * random.choice((-5, 5))
         self.paddles = paddles
         self.collision_tolerance = 10
+        self.collision_sound = pygame.mixer.Sound(os.path.join(sounds_path, "collision.wav"))
+        self.collision_sound.set_volume(0.3)
 
     def update(self):
         self.rect.x += self.speed_x
@@ -22,20 +24,38 @@ class Ball(pygame.sprite.Sprite):
 
         # Collision with top and bottom of the screen
         if self.rect.top <= 0 or self.rect.bottom >= SCREEN_HEIGHT:
+            pygame.mixer.Sound.play(self.collision_sound)
             self.speed_y *= -1
+        # Collision with left and right sides of the screen
+        if self.rect.left <= 0 or self.rect.right >= SCREEN_WIDTH:
+            self.reset_ball()
 
+        # Collision with paddles on both sides
         if pygame.sprite.spritecollide(self, self.paddles, False):
-            collision_paddle = pygame.sprite.spritecollide(self, self.paddles, False)[0].rect
-            if abs(self.rect.left - collision_paddle.right) < self.collision_tolerance and self.speed_x < 0:
-                self.speed_x *= -1
-            if abs(self.rect.right - collision_paddle.left) < self.collision_tolerance and self.speed_x > 0:
-                self.speed_x *= -1
-            if abs(self.rect.top - collision_paddle.bottom) < self.collision_tolerance and self.speed_y > 0:
-                self.rect.top = collision_paddle.bottom
-                self.speed_y *= -1
-            if abs(self.rect.bottom - collision_paddle.top) < self.collision_tolerance and self.speed_y < 0:
-                self.rect.bottom = collision_paddle.top
-                self.speed_y *= -1
+            pygame.mixer.Sound.play(self.collision_sound)
+            # Assign list of collision paddles
+            collision_paddles = pygame.sprite.spritecollide(self, self.paddles, False)
+            # Looping through list and check coordinates
+            for paddle in collision_paddles:
+                # A collision_tolerance for less restrictive statements.
+                # A self.speed checking for moving sprites. Should be movement in different directions.
+                if abs(self.rect.left - paddle.rect.right) < self.collision_tolerance and self.speed_x < 0:
+                    self.rect.left = paddle.rect.right  # Assign coordinates back to intersect
+                    self.speed_x *= -1  # Invert moving
+                if abs(self.rect.right - paddle.rect.left) < self.collision_tolerance and self.speed_x > 0:
+                    self.rect.right = paddle.rect.left
+                    self.speed_x *= -1
+                if abs(self.rect.top - paddle.rect.bottom) < self.collision_tolerance and self.speed_y > 0:
+                    self.rect.top = paddle.rect.bottom
+                    self.speed_y *= -1
+                if abs(self.rect.bottom - paddle.rect.top) < self.collision_tolerance and self.speed_y < 0:
+                    self.rect.bottom = paddle.rect.top
+                    self.speed_y *= -1
 
+
+    def reset_ball(self):
+        self.speed_y *= random.choice((-1, 1))
+        self.speed_x *= random.choice((-1, 1))
+        self.rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
 

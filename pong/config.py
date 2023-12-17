@@ -5,4 +5,4 @@ SCREEN_HEIGHT = 720
 FPS = 60
 
 assets_path = os.path.join(os.path.dirname(__file__), "../assets")
-
+sounds_path = os.path.join(os.path.dirname(__file__), "../sounds")

@@ -10,14 +10,21 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(midleft=(position_x, position_y))
         self.speed = speed
 
-    def update(self, keys):
+    def input(self):
+        keys = pygame.key.get_pressed()
         # Movements Up and Down by Arrow Up, W, K and Arrow Down, S, J
         if any(keys[key] for key in (K_UP, K_w, K_k)):
             self.rect.move_ip(0, -self.speed)
         if any(keys[key] for key in (K_DOWN, K_s, K_j)):
             self.rect.move_ip(0, self.speed)
+
+    def constrain(self):
         # Limiting movements only in screen borders
         if self.rect.top <= 0:
             self.rect.top = 0
         if self.rect.bottom >= SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
+
+    def update(self):
+        self.input()
+        self.constrain()
