@@ -1,19 +1,10 @@
 import pygame
-from pygame.locals import *
-import os
+from pygame.locals import KEYDOWN, K_ESCAPE, QUIT
 
 from config import *
 from player import Player
 from computer import Computer
 from ball import Ball
-
-def check_collision():
-    if ball.rect.right >= SCREEN_WIDTH or ball.rect.left <0:
-        ball.change_direction()
-    if ball.rect.bottom >= SCREEN_HEIGHT or ball.rect.top <= 0:
-        ball.change_direction()
-    if ball.rect.collideobjects([player, computer]):
-        ball.change_direction()
 
 pygame.init()
 
@@ -21,14 +12,18 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Pong")
 clock = pygame.time.Clock()
 
+
+paddle_speed = 6
+ball_speed_x, ball_speed_y = 1, 1
 background_image = pygame.image.load(os.path.join(assets_path, "board.png"))
 
-player = Player(os.path.join(assets_path, "paddle.png"), 0, SCREEN_HEIGHT // 2)
-computer = Computer(os.path.join(assets_path, "paddle.png"), SCREEN_WIDTH, SCREEN_HEIGHT // 2)
-ball = Ball(os.path.join(assets_path, "ball.png"), SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-
-all_sprites = pygame.sprite.Group()
-all_sprites.add(player, computer, ball)
+# Game objects and groups
+player = Player(os.path.join(assets_path, "paddle.png"), 0, SCREEN_HEIGHT // 2, paddle_speed)
+computer = Computer(os.path.join(assets_path, "paddle.png"), SCREEN_WIDTH, SCREEN_HEIGHT // 2, paddle_speed)
+paddles_group = pygame.sprite.Group(player, computer)
+ball = Ball(os.path.join(assets_path, "ball.png"), SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2,
+            ball_speed_x, ball_speed_y, paddles_group)
+ball_group = pygame.sprite.Group(ball)
 
 running = True
 while running:
@@ -41,17 +36,16 @@ while running:
 
     screen.blit(background_image, (0, 0))
 
-    check_collision()
-
     keys = pygame.key.get_pressed()
+
+    paddles_group.draw(screen)
+    ball_group.draw(screen)
 
     player.update(keys)
     computer.update()
-    ball.update()
-    all_sprites.draw(screen)
+    ball_group.update()
 
     pygame.display.flip()
-
     clock.tick(FPS)
 
 pygame.quit()

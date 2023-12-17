@@ -3,18 +3,17 @@ from config import *
 
 
 class Computer(pygame.sprite.Sprite):
-    def __init__(self, image_path, position_x=0, position_y=0):
+    def __init__(self, image_path, position_x, position_y, speed):
         super().__init__()
-        self.image = pygame.image.load(image_path).convert()
-        self.rect = self.image.get_rect()
-        self.position_x = position_x
-        self.position_y = position_y
-        self.rect.topright = (position_x, position_y)
-
+        self.image = pygame.image.load(image_path)
+        self.rect = self.image.get_rect(midright=(position_x, position_y))
+        self.speed = speed
+        
     def update(self):
-        global paddle_speed
-        self.rect.move_ip(0, paddle_speed)
+        self.rect.y += self.speed
+
+        # Limiting movements only in screen borders
         if self.rect.top <= 0:
-            paddle_speed = abs(paddle_speed)
+            self.speed = abs(self.speed)
         if self.rect.bottom >= SCREEN_HEIGHT:
-            paddle_speed = -abs(paddle_speed)
+            self.speed = -abs(self.speed)
