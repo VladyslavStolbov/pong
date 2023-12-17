@@ -10,11 +10,11 @@ class Computer(pygame.sprite.Sprite):
         self.position_x = position_x
         self.position_y = position_y
         self.rect.topright = (position_x, position_y)
-        self.speed = speed
 
     def update(self):
-        self.rect.move_ip(0, self.speed)
-        if self.rect.topright[1] <= 0:
-            self.speed = abs(self.speed)
-        if self.rect.bottomright[1] >= SCREEN_HEIGHT:
-            self.speed = -abs(self.speed)
+        global paddle_speed
+        self.rect.move_ip(0, paddle_speed)
+        if self.rect.top <= 0:
+            paddle_speed = abs(paddle_speed)
+        if self.rect.bottom >= SCREEN_HEIGHT:
+            paddle_speed = -abs(paddle_speed)

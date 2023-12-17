@@ -7,6 +7,14 @@ from player import Player
 from computer import Computer
 from ball import Ball
 
+def check_collision():
+    if ball.rect.right >= SCREEN_WIDTH or ball.rect.left <0:
+        ball.change_direction()
+    if ball.rect.bottom >= SCREEN_HEIGHT or ball.rect.top <= 0:
+        ball.change_direction()
+    if ball.rect.collideobjects([player, computer]):
+        ball.change_direction()
+
 pygame.init()
 
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -15,12 +23,12 @@ clock = pygame.time.Clock()
 
 background_image = pygame.image.load(os.path.join(assets_path, "board.png"))
 
-player_sprite = Player(os.path.join(assets_path, "paddle.png"), 0, SCREEN_HEIGHT // 2)
-computer_sprite = Computer(os.path.join(assets_path, "paddle.png"), SCREEN_WIDTH, SCREEN_HEIGHT // 2)
-ball_sprite = Ball(os.path.join(assets_path, "ball.png"), SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+player = Player(os.path.join(assets_path, "paddle.png"), 0, SCREEN_HEIGHT // 2)
+computer = Computer(os.path.join(assets_path, "paddle.png"), SCREEN_WIDTH, SCREEN_HEIGHT // 2)
+ball = Ball(os.path.join(assets_path, "ball.png"), SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
 all_sprites = pygame.sprite.Group()
-all_sprites.add(player_sprite, computer_sprite, ball_sprite)
+all_sprites.add(player, computer, ball)
 
 running = True
 while running:
@@ -33,10 +41,13 @@ while running:
 
     screen.blit(background_image, (0, 0))
 
+    check_collision()
+
     keys = pygame.key.get_pressed()
-    player_sprite.update(keys)
-    computer_sprite.update()
-    ball_sprite.update()
+
+    player.update(keys)
+    computer.update()
+    ball.update()
     all_sprites.draw(screen)
 
     pygame.display.flip()

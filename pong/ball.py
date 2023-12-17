@@ -1,7 +1,6 @@
-import random
-from config import *
-
 import pygame
+from config import *
+import random
 
 
 class Ball(pygame.sprite.Sprite):
@@ -12,14 +11,14 @@ class Ball(pygame.sprite.Sprite):
         self.position_x = position_x
         self.position_y = position_y
         self.rect.center = (position_x, position_y)
-        self.ball_direction = self.choose_direction()
+        self.ball_direction = random.choice((True, False))
         self.random_coordinate = random.randint(-2,  2)
 
     def update(self):
         if self.ball_direction:
-            self.rect.move_ip(speed, self.random_coordinate)
+            self.rect.move_ip(paddle_speed, self.random_coordinate)
         if not self.ball_direction:
-            self.rect.move_ip(-speed, self.random_coordinate)
+            self.rect.move_ip(-paddle_speed, self.random_coordinate)
 
-    def choose_direction(self):
-        return random.choice((True, False))
+    def change_direction(self):
+        self.ball_direction = not self.ball_direction

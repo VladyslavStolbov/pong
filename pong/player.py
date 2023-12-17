@@ -14,11 +14,11 @@ class Player(pygame.sprite.Sprite):
 
     def update(self, keys):
         if any(keys[key] for key in (K_UP, K_w, K_k)):
-            self.rect.move_ip(0, -speed)
+            self.rect.move_ip(0, -paddle_speed)
         if any(keys[key] for key in (K_DOWN, K_s, K_j)):
-            self.rect.move_ip(0, speed)
+            self.rect.move_ip(0, paddle_speed)
 
-        if self.rect.topleft < (self.position_x, 0):
-            self.rect.topleft = (self.position_x, 0)
-        if self.rect.bottomleft > (self.position_x, SCREEN_HEIGHT):
-            self.rect.bottomleft = (self.position_x, SCREEN_HEIGHT)
+        if self.rect.top <= 0:
+            self.rect.top = 0
+        if self.rect.bottom >= SCREEN_HEIGHT:
+            self.rect.bottom = SCREEN_HEIGHT
