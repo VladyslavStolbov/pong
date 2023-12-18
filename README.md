@@ -2,12 +2,12 @@
 
 ## MVP
 - [X] Keyboard movements
-- [ ] Basic ball collision
-- [ ] Score for each player
+- [X] Basic ball collision
+- [X] Score for each player
 - [ ] Game win/lose, end conditions
-- [ ] Basic Soundeffects
+- [X] Basic Soundeffects
 - [ ] Start By Clicking any botton
-- [ ] Everything are Sprites class
+- [X] Everything are Sprites class
 
 Additional(if everything above made and looks good):
 - [ ] Start menu
