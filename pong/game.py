@@ -8,6 +8,7 @@ from computer import Computer
 from ball import Ball
 from score import Score
 
+
 class Game:
     def __init__(self):
         pygame.init()

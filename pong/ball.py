@@ -1,5 +1,6 @@
 import pygame
 from config import *
+from score import Score
 import random
 
 
@@ -12,8 +13,9 @@ class Ball(pygame.sprite.Sprite):
         self.speed_y = speed_y * random.choice((-5, 5))
         self.paddles = paddles
         self.collision_tolerance = 10
-        self.collision_sound = pygame.mixer.Sound(os.path.join(sounds_path, "collision.wav"))
+        self.collision_sound = pygame.mixer.Sound(os.path.join(sounds_path, "collision.wav"))  # noqa: F405
         self.collision_sound.set_volume(0.3)
+        self.score = Score()
 
     def update(self):
         self.rect.x += self.speed_x
@@ -23,11 +25,15 @@ class Ball(pygame.sprite.Sprite):
     def collisions(self):
 
         # Collision with top and bottom of the screen
-        if self.rect.top <= 0 or self.rect.bottom >= SCREEN_HEIGHT:
+        if self.rect.top <= 0 or self.rect.bottom >= SCREEN_HEIGHT:  # noqa: F405
             pygame.mixer.Sound.play(self.collision_sound)
             self.speed_y *= -1
         # Collision with left and right sides of the screen
-        if self.rect.left <= 0 or self.rect.right >= SCREEN_WIDTH:
+        if self.rect.right >= SCREEN_WIDTH:
+            self.score.change_score(is_player=True)
+            self.reset_ball()
+        if self.rect.left <= 0:
+            self.score.change_score(is_player=False)
             self.reset_ball()
 
         # Collision with paddles on both sides
@@ -51,7 +57,6 @@ class Ball(pygame.sprite.Sprite):
                 if abs(self.rect.bottom - paddle.rect.top) < self.collision_tolerance and self.speed_y < 0:
                     self.rect.bottom = paddle.rect.top
                     self.speed_y *= -1
-
 
     def reset_ball(self):
         self.speed_y *= random.choice((-1, 1))
