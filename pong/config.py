@@ -1,8 +1,12 @@
 import os
+import pygame
 
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 FPS = 60
+
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Pong")
 
 paddle_speed = 6
 ball_speed_x, ball_speed_y = 1, 1

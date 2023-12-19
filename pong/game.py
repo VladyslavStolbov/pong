@@ -1,30 +1,33 @@
 import sys
 import os
+import time
+
 import pygame
 from pygame.locals import KEYDOWN, K_ESCAPE, QUIT
-from config import SCREEN_WIDTH, SCREEN_HEIGHT, assets_path, paddle_speed, ball_speed_x, ball_speed_y
+import config
 from player import Player
 from computer import Computer
 from ball import Ball
-from score import Score
+from game_manager import GameManager
 
 
 class Game:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-        pygame.display.set_caption("Pong")
         self.clock = pygame.time.Clock()
-        self.background_image = pygame.image.load(os.path.join(assets_path, "board.png"))
+        self.background_image = pygame.image.load(os.path.join(config.assets_path, "board.png"))
+        self.font = pygame.font.Font(os.path.join(config.fonts_path, "m5x7.ttf"), 256)
 
         # Game objects and groups
-        self.player = Player(os.path.join(assets_path, "paddle.png"), 0, SCREEN_HEIGHT // 2, paddle_speed)
-        self.computer = Computer(os.path.join(assets_path, "paddle.png"), SCREEN_WIDTH, SCREEN_HEIGHT // 2, paddle_speed)
+        self.player = Player(os.path.join(config.assets_path, "paddle.png"), 0, config.SCREEN_HEIGHT // 2,
+                             config.paddle_speed)
+        self.computer = Computer(os.path.join(config.assets_path, "paddle.png"), config.SCREEN_WIDTH,
+                                 config.SCREEN_HEIGHT // 2, config.paddle_speed)
         self.paddles_group = pygame.sprite.Group(self.player, self.computer)
-        self.ball = Ball(os.path.join(assets_path, "ball.png"), SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2,
-                         ball_speed_x, ball_speed_y, self.paddles_group)
+        self.ball = Ball(os.path.join(config.assets_path, "ball.png"), config.SCREEN_WIDTH // 2,
+                         config.SCREEN_HEIGHT // 2, config.ball_speed_x, config.ball_speed_y, self.paddles_group)
         self.ball_group = pygame.sprite.Group(self.ball)
-        self.score = Score()
+        self.game_manager = GameManager(self.font)
 
     def event_handler(self):
         for event in pygame.event.get():
@@ -36,14 +39,16 @@ class Game:
                 sys.exit()
 
     def update(self):
-        self.screen.blit(self.background_image, (0, 0))
+        config.screen.blit(self.background_image, (0, 0))
         self.paddles_group.update()
         self.ball_group.update()
+        self.game_manager.check_for_collision(self.ball)
+        self.game_manager.check_for_win()
 
     def draw(self):
-        self.score.display_score(self.screen)
-        self.paddles_group.draw(self.screen)
-        self.ball_group.draw(self.screen)
+        self.game_manager.display_score()
+        self.paddles_group.draw(config.screen)
+        self.ball_group.draw(config.screen)
 
     def run(self):
         running = True

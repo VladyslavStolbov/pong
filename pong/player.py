@@ -1,5 +1,5 @@
 import pygame
-from config import *
+import config
 from pygame.locals import *
 
 
@@ -22,8 +22,8 @@ class Player(pygame.sprite.Sprite):
         # Limiting movements only in screen borders
         if self.rect.top <= 0:
             self.rect.top = 0
-        if self.rect.bottom >= SCREEN_HEIGHT:
-            self.rect.bottom = SCREEN_HEIGHT
+        if self.rect.bottom >= config.SCREEN_HEIGHT:
+            self.rect.bottom = config.SCREEN_HEIGHT
 
     def update(self):
         self.input()

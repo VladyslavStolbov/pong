@@ -1,5 +1,5 @@
 import pygame
-from config import *
+import config
 
 
 class Computer(pygame.sprite.Sprite):
@@ -15,5 +15,5 @@ class Computer(pygame.sprite.Sprite):
         # Limiting movements only in screen borders
         if self.rect.top <= 0:
             self.speed = abs(self.speed)
-        if self.rect.bottom >= SCREEN_HEIGHT:
+        if self.rect.bottom >= config.SCREEN_HEIGHT:
             self.speed = -abs(self.speed)
