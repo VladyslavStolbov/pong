@@ -13,7 +13,7 @@ class Ball(pygame.sprite.Sprite):
         self.speed_y = speed_y * random.choice((-5, 5))
         self.paddles = paddles
         self.collision_tolerance = 10
-        self.collision_sound = pygame.mixer.Sound(os.path.join(config.sounds_path, "collision.wav"))  # noqa: F405
+        self.collision_sound = pygame.mixer.Sound(os.path.join(config.sounds_path, "collision.wav"))
         self.collision_sound.set_volume(0.3)
 
     def update(self):
@@ -29,7 +29,7 @@ class Ball(pygame.sprite.Sprite):
 
         # Collision with paddles on both sides
         if pygame.sprite.spritecollide(self, self.paddles, False):
-            pygame.mixer.Sound.play(self.collision_sound)
+            self.collision_sound.play()
             # Assign list of collision paddles
             collision_paddles = pygame.sprite.spritecollide(self, self.paddles, False)
             # Looping through list and check coordinates
@@ -49,7 +49,7 @@ class Ball(pygame.sprite.Sprite):
                     self.rect.bottom = paddle.rect.top
                     self.speed_y *= -1
 
-    def reset_ball(self):  # TODO: Add a score sound
+    def reset_ball(self):
         self.speed_y *= random.choice((-1, 1))
         self.speed_x *= random.choice((-1, 1))
         self.rect.center = (config.SCREEN_WIDTH // 2, config.SCREEN_HEIGHT // 2)
