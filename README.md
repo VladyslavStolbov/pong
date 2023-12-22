@@ -4,12 +4,12 @@
 - [X] Keyboard movements
 - [X] Basic ball collision
 - [X] Score for each player
-- [ ] Game win/lose, end conditions
+- [X] Game win/lose, end conditions
 - [X] Basic Sound effects
-- [ ] Start By Clicking any button
+- [X] Start By Clicking space button
 - [X] Everything are Sprites class
 
 Additional(if everything above made and looks good):
-- [ ] Start menu
-- [ ] End menu
+- [X] Start menu
+- [X] End menu
 - [X] Controls for Vim geeks
