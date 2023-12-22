@@ -1,6 +1,6 @@
 import pygame
-import config
 from pygame.locals import *
+import config
 
 
 class Player(pygame.sprite.Sprite):
@@ -10,21 +10,29 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(midleft=(position_x, position_y))
         self.speed = speed
 
-    def input(self):
+    def handle_input(self):
+        """Handle keyboard input for player movement"""
         keys = pygame.key.get_pressed()
-        # Movements Up and Down by Arrow Up, W, K and Arrow Down, S, J
+
+        # Move up if any of the specified keys is pressed
         if any(keys[key] for key in (K_UP, K_w, K_k)):
             self.rect.move_ip(0, -self.speed)
+
+        # Move down if any of the specified keys is pressed
         if any(keys[key] for key in (K_DOWN, K_s, K_j)):
             self.rect.move_ip(0, self.speed)
 
-    def constrain(self):
-        # Limiting movements only in screen borders
-        if self.rect.top <= 0:
+    def constrain_to_screen(self):
+        """Constrain player movement within the screen borders"""
+        # Ensure the player does not go above the screen
+        if self.rect.top < 0:
             self.rect.top = 0
-        if self.rect.bottom >= config.SCREEN_HEIGHT:
+
+        # Ensure the player does not go below the screen
+        if self.rect.bottom > config.SCREEN_HEIGHT:
             self.rect.bottom = config.SCREEN_HEIGHT
 
     def update(self):
-        self.input()
-        self.constrain()
+        """Update player state"""
+        self.handle_input()
+        self.constrain_to_screen()

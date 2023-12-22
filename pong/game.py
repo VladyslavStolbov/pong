@@ -26,6 +26,7 @@ class Game:
         self.ball_group = pygame.sprite.Group(self.ball)
 
     def event_handler(self):
+        """Handling game events"""
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
@@ -35,6 +36,7 @@ class Game:
                 sys.exit()
 
     def update(self):
+        """Update game logic"""
         config.screen.blit(config.background_image, (0, 0))
         self.paddles_group.update()
         self.ball_group.update()
@@ -42,12 +44,14 @@ class Game:
         self.game_manager.check_for_win()
 
     def draw(self):
+        """Draw game objects on the screen"""
         self.game_manager.display_score()
         self.paddles_group.draw(config.screen)
         self.ball_group.draw(config.screen)
         pygame.display.flip()
 
     def main(self):
+        """Main game loop"""
         running = True
         while running:
             self.event_handler()
@@ -56,4 +60,5 @@ class Game:
             config.clock.tick(config.FPS)
 
     def run(self):
+        """Run game"""
         self.game_manager.start_menu()

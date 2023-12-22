@@ -6,8 +6,8 @@ import game
 
 
 class GameManger():
-
     def start_menu(self):
+        """Display the start menu with PONG title and prompt to start the game."""
         pong_text = config.main_font.render("PONG", True, "white", "black")
         pong_rect = pong_text.get_rect(center=(config.SCREEN_WIDTH // 2, (config.SCREEN_HEIGHT // 2) - 50))
         press_key_text = config.secondary_font.render("Press space to start game!", True, "white", "black")
@@ -17,7 +17,6 @@ class GameManger():
         while running:
             for event in pygame.event.get():
                 if event.type == KEYDOWN and event.key == K_SPACE:
-                    config.game_start_sound.play()
                     game.Game().main()
                     running = False
                 if event.type == QUIT:
@@ -34,6 +33,7 @@ class GameManger():
             config.clock.tick(config.FPS)
 
     def end_menu(self):
+        """Display the end menu with the winner and prompt to restart the game"""
         win_text = config.main_font.render(f"{config.winner} win!", True, "white", "black")
         win_text_rect = win_text.get_rect(center=(config.SCREEN_WIDTH // 2, (config.SCREEN_HEIGHT // 2) - 20))
         press_key_text = config.secondary_font.render("Press space to restart game!", True, "white", "black")
@@ -43,7 +43,6 @@ class GameManger():
 
             for event in pygame.event.get():
                 if event.type == KEYDOWN and event.key == K_SPACE:
-                    config.game_start_sound.play()
                     self.reset_game()
                     game.Game().main()
                 if event.type == QUIT:
@@ -62,10 +61,12 @@ class GameManger():
             config.clock.tick(config.FPS)
 
     def reset_game(self):
+        """Reset the game scores"""
         config.player_score = 0
         config.computer_score = 0
 
     def display_score(self):
+        """Display the current scores on the screen."""
         player_score_number = config.main_font.render(str(config.player_score), True, "white")
         computer_score_number = config.main_font.render(str(config.computer_score), True, "white")
 
@@ -76,6 +77,7 @@ class GameManger():
         config.screen.blit(computer_score_number, computer_score_rect)
 
     def check_for_win(self):
+        """Check if either player or computer has won and display the end menu"""
         if config.player_score == 10:
             config.winner = "Player"
             self.end_menu()
@@ -84,6 +86,7 @@ class GameManger():
             self.end_menu()
 
     def check_for_collision(self, ball):
+        """Check if the ball has collided with the screen boundaries and update scores"""
         if ball.rect.right >= config.SCREEN_WIDTH:
             config.score_sound.play()
             config.player_score += config.score_increment
