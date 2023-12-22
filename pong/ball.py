@@ -23,7 +23,7 @@ class Ball(pygame.sprite.Sprite):
 
     def collisions(self):
         # Collision with top and bottom of the screen
-        if self.rect.top <= 0 or self.rect.bottom >= config.SCREEN_HEIGHT:  # noqa: F405
+        if self.rect.top <= 0 or self.rect.bottom >= config.SCREEN_HEIGHT:
             pygame.mixer.Sound.play(self.collision_sound)
             self.speed_y *= -1
 

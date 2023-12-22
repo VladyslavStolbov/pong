@@ -14,6 +14,8 @@ class Game:
         pygame.init()
 
         self.score_sound = pygame.mixer.Sound(os.path.join(config.sounds_path, "score.wav"))
+        self.game_start_sound = pygame.mixer.Sound(os.path.join(config.sounds_path, "game_start.wav"))
+        self.game_over_sound = pygame.mixer.Sound(os.path.join(config.sounds_path, "game_over.wav"))
         self.main_font = pygame.font.Font(os.path.join(config.fonts_path, "m5x7.ttf"), 256)
         self.secondary_font = pygame.font.Font(os.path.join(config.fonts_path, "m5x7.ttf"), 64)
         self.winner = None
@@ -50,6 +52,7 @@ class Game:
         while running:
             for event in pygame.event.get():
                 if event.type == KEYDOWN and event.key == K_SPACE:
+                    self.game_start_sound.play()
                     running = False
                     self.main()
                 if event.type == QUIT:
@@ -77,6 +80,7 @@ class Game:
 
             for event in pygame.event.get():
                 if event.type == KEYDOWN and event.key == K_SPACE:
+                    self.game_start_sound.play()
                     self.reset_game()
                 if event.type == QUIT:
                     pygame.quit()
@@ -115,6 +119,7 @@ class Game:
         config.player_score = 0
         config.computer_score = 0
         self.main()
+        self.game_over_sound.play()
 
     def event_handler(self):
         for event in pygame.event.get():
