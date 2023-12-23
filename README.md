@@ -5,7 +5,9 @@ _Classic Pong is a nostalgic and minimalistic take on the iconic Pong game, impl
 
 
 ## Screenshots
-
+![Screenshot from 2023-12-23 05-29-47](https://github.com/VladyslavStolbov/pong/assets/124466211/8cf4d0f4-aa3c-4722-a59a-a39a25f56d10)
+![Screenshot from 2023-12-23 05-35-56](https://github.com/VladyslavStolbov/pong/assets/124466211/9c97d839-1cef-4d0a-b5c8-b355f3a04f1f)
+![Screenshot from 2023-12-23 05-30-51](https://github.com/VladyslavStolbov/pong/assets/124466211/0bfc3907-df8e-4247-917c-0526bbff10db)
 
 ## Features
 - **_Pixelated 1-bit Style:_** Experience the classic Pong game with a charming pixelated aesthetic.
