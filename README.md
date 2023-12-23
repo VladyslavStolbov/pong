@@ -1,6 +1,13 @@
 # Pong
 _Classic Pong is a nostalgic and minimalistic take on the iconic Pong game, implemented in Pygame with a pixelated 1-bit style. The game features basic sound effects, easy controls, and the ability to restart for endless fun._
 
+## Controls
+- ### Player:
+  - **_Move Up:_** W, Key Up, K
+  - **_Move Down:_** S, Key Down, J 
+- ### General controls:
+   - **_Quit:_** Esc
+   - **_Start/Restart:_** Space
 ## Demo
 https://github.com/VladyslavStolbov/pong/assets/124466211/911a2961-50da-4469-8508-215aef9d05ee
 
