@@ -1,21 +1,6 @@
 # Pong
 _Classic Pong is a nostalgic and minimalistic take on the iconic Pong game, implemented in Pygame with a pixelated 1-bit style. The game features basic sound effects, easy controls, and the ability to restart for endless fun._
 
-## Controls
-- ### Player:
-  - **_Move Up:_** W, Key Up, K
-  - **_Move Down:_** S, Key Down, J 
-- ### General controls:
-   - **_Quit:_** Esc
-   - **_Start/Restart:_** Space
-## Demo
-https://github.com/VladyslavStolbov/pong/assets/124466211/911a2961-50da-4469-8508-215aef9d05ee
-
-## Screenshots
-![Screenshot from 2023-12-23 05-29-47](https://github.com/VladyslavStolbov/pong/assets/124466211/8cf4d0f4-aa3c-4722-a59a-a39a25f56d10)
-![Screenshot from 2023-12-23 05-35-56](https://github.com/VladyslavStolbov/pong/assets/124466211/9c97d839-1cef-4d0a-b5c8-b355f3a04f1f)
-![Screenshot from 2023-12-23 05-30-51](https://github.com/VladyslavStolbov/pong/assets/124466211/0bfc3907-df8e-4247-917c-0526bbff10db)
-
 ## Features
 - **_Pixelated 1-bit Style:_** Experience the classic Pong game with a charming pixelated aesthetic.
 
@@ -24,6 +9,14 @@ https://github.com/VladyslavStolbov/pong/assets/124466211/911a2961-50da-4469-850
 - **_Simple Controls:_** Navigate the paddles effortlessly with easy-to-use controls.
 
 - **_Game Restarts:_** Restart the game at any time for continuous fun without interruptions.
+
+## Demo
+https://github.com/VladyslavStolbov/pong/assets/124466211/911a2961-50da-4469-8508-215aef9d05ee
+
+## Screenshots
+![Screenshot from 2023-12-23 05-29-47](https://github.com/VladyslavStolbov/pong/assets/124466211/8cf4d0f4-aa3c-4722-a59a-a39a25f56d10)
+![Screenshot from 2023-12-23 05-35-56](https://github.com/VladyslavStolbov/pong/assets/124466211/9c97d839-1cef-4d0a-b5c8-b355f3a04f1f)
+![Screenshot from 2023-12-23 05-30-51](https://github.com/VladyslavStolbov/pong/assets/124466211/0bfc3907-df8e-4247-917c-0526bbff10db)
 
 ## MVP (Minimum Viable Product)
 - [X] Keyboard Movements: Use the keyboard controls to move the paddles.
@@ -38,6 +31,14 @@ https://github.com/VladyslavStolbov/pong/assets/124466211/911a2961-50da-4469-850
 - [X] Start Menu: Implement a start menu for a more polished and user-friendly experience.
 - [X] End Menu: Create an end menu to provide players with a clear conclusion to each game.
 - [X] Controls for Vim Geeks: Cater to Vim enthusiasts by incorporating controls such as 'k' (up) and 'j' (down).
+
+## Controls
+- ### Player:
+  - **_Move Up:_** W, Key Up, K
+  - **_Move Down:_** S, Key Down, J 
+- ### General controls:
+   - **_Quit:_** Esc
+   - **_Start/Restart:_** Space
 
 ## Installation
 
