@@ -28,9 +28,9 @@ _Classic Pong is a nostalgic and minimalistic take on the iconic Pong game, impl
 - [X] Sprites Class: Utilize the Sprites class for managing game elements efficiently.
 
 ## Additional Features (if MVP is met)
--[X] Start Menu: Implement a start menu for a more polished and user-friendly experience.
--[X] End Menu: Create an end menu to provide players with a clear conclusion to each game.
--[X] Controls for Vim Geeks: Cater to Vim enthusiasts by incorporating controls such as 'k' (up) and 'j' (down).
+- [X] Start Menu: Implement a start menu for a more polished and user-friendly experience.
+- [X] End Menu: Create an end menu to provide players with a clear conclusion to each game.
+- [X] Controls for Vim Geeks: Cater to Vim enthusiasts by incorporating controls such as 'k' (up) and 'j' (down).
 
 ## Installation
 
